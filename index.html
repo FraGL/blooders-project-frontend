@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Blooders</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css" />
+        <script type="text/javascript" src="https://unpkg.com/vue@2.5.17/dist/vue.js"></script>
+    </head>
+    <body>
+        <section class="hero is-dark is-medium is-bold">
+                <div class="hero-head">
+                        <nav class="navbar">
+                            <div class="container">
+                                <div class="navbar-brand">
+                                    <a class="navbar-item">
+                                        Blooders
+                                    </a>
+                                </div>
+                                <div id="navbarMenu" class="navbar-menu">
+                                    <div class="navbar-end">
+                                        <div class="tabs is-right">
+                                            <ul>
+                                                <li class="is-active"><a>Home</a></li>
+                                                <li><a href="">Sobre Nosotros</a></li>
+                                                <li><a href="">Requisitos</a></li>
+                                                <li><a href="">Mapa</a></li>
+                                                <li><a href="">Por que donar</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+            <div class="hero-body">
+                <div class="container has-text-centered">
+                    <h1 class="title">
+                    Blooders
+                    </h1>
+                    <h2 class="subtitle">
+                    Encontrar ayuda nunca fue mas facil
+                    </h2>
+                </div>
+            </div>
+            <div class="hero-foot column is-4 is-offset-4">
+                <div class="box" id="app">
+                    <form v-if="!registro">
+                        <h3 class="subtitle has-text-grey has-text-centered">Inicio de Sesiön</h3>
+                        <div class="field">
+                            <div class="control">
+                                <input class="input is-medium" type="email" placeholder="Correo" autofocus="" v-model.lazy="email">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="control">
+                                <input class="input is-medium" type="password" placeholder="Contraseña" v-model.lazy="password">
+                            </div>
+                        </div>
+                        <p class="help is-danger">{{message}}</p>
+                        <div class="field">
+                            <label class="checkbox">
+                                <input type="checkbox">
+                                Recuerdame
+                            </label>
+                        </div>
+                        <button class="button is-block is-info is-large is-fullwidth" @click.prevent="loginAttempt(email, password)">Iniciar Sesión</button>
+                        <p class="help is-danger"><a @click.prevent="goToRegister">¿Aun no tienes una cuenta? Registrate</a></p>
+                    </form>
+                    <form v-if="registro">
+                        <h3 class="subtitle has-text-grey has-text-centered is-large">Registro</h3>
+                        <div class="field">
+                            <div class="control">
+                                <input class="input is-medium is-success" type="text" placeholder="Nombre" autofocus="">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="control">
+                                <input class="input is-medium is-success" type="email" placeholder="Correo" autofocus="" v-model.lazy="email">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="control">
+                                <input class="input is-medium is-warning" type="password" placeholder="Contraseña" v-model.lazy="password1">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="control">
+                                <input class="input is-medium is-danger" type="password" placeholder="Verificar contraseña" v-model.lazy="password2">
+                            </div>
+                            <p v-if="password1 == password2 && password1.length > 1" class="help is-success">Las contraseñas coinciden</p>
+                            <p v-else-if="password1 != password2 && password1.length > 1" class="help is-danger">Las contraseñas no coinciden</p>
+                        </div>
+
+
+                        <div class="field is-grouped is-grouped-centered" >
+						  <div class="control is-centered is-offset-4">
+						    <div class="select is-medium is-primary is-expanded">
+						      <select>
+						        <option>Género</option>
+						        <option>Masculino</option>
+						        <option>Femenino</option>
+						        <option>Otro</option>
+						      </select>
+						    </div>
+						</div>
+
+						  <div class="control">
+
+						    <div class="select is-medium is-primary has-text-centered">
+						      <select>
+						        <option>Edad</option>
+						      </select>
+						    </div>
+						  </div>
+						 <div class="control">
+						    <div class="select is-medium is-danger">
+						      <select>
+						        <option>Tipo de sangre</option>
+						        <option>A+</option>
+						        <option>A-</option>
+						        <option>O+</option>
+						        <option>O-</option>
+						        <option>B+</option>
+						        <option>B-</option>
+						        <option>AB+</option>
+						        <option>AB-</option>
+						      </select>
+						    </div>
+						  </div>
+						</div>
+                        <button class="button is-block is-info is-large is-fullwidth">Registrarse</button>
+                         <p class="help is-danger"><a @click.prevent="goToLogin">¿Ya tienes una cuenta? Inicia sesión </a></p>
+                    </form>
+                </div>
+            </div>
+        </section>
+        <div class="box cta">
+            <p class="has-text-centered">
+                
+            </p>
+        </div>
+        <section class="container">
+            <div class="columns features">
+                <div class="column is-4">
+                    <div class="card is-shady">
+                        <figure class="image is-square">
+                            <img src="http://laopcion.com.mx/assets/2014/january/30/6y1zGZnqNi.jpg">
+                        </figure>
+                        <div class="card-content">
+                            <div class="content">
+                                <h4>Busca cerca de tí</h4>
+                                <p>Las busquedas para transfunciones siempre se haran lo más cercano posible a tu ubicación actual</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="column is-4">
+                    <div class="card is-shady">
+                            <figure class="image is-square">
+                                <img src="https://media.istockphoto.com/vectors/blood-bag-and-hand-of-donor-with-heart-donation-vector-id615259652?k=6&m=615259652&s=612x612&w=0&h=TvQkLO9ozwjhyr_c6Jw25QVzpm0b_3OPF5tn6Of5vJM=">
+                            </figure>
+                        <div class="card-content">
+                            <div class="content">
+                                <h4>¿Donante o Solicitante?</h4>
+                                <p>Blooders te da la opción de apoyar personas por medio de donaciones o pedir ayuda para ti o un conocido como solicitante</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="column is-4">
+                    <div class="card is-shady">
+                            <figure class="image is-square">
+                                <img src="https://eresdeportista.com/wp-content/uploads/2018/04/ayuno-intermitente.jpg">
+                            </figure>
+                        <div class="card-content">
+                            <div class="content">
+                                <h4>Requisitos para donar</h4>
+                                <p>Mantente al tanto de lo que necesitas para poder donar sangre, incluyendo un reloj para el ayuno</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>
+
+<script>
+    var vm = new Vue({
+       el: '#app',
+       data: {
+           email: '',
+           password: '',
+           password1: '',
+           password2: '',
+           registro: false,
+           attempt: false,
+           message: ''
+       },
+       methods: {
+           goToLogin: function() {
+               this.registro = false;
+           },
+           goToRegister: function() {
+               this.registro = true;
+           },
+           loginAttempt: function(email, password) {
+               if(!email && !password) {
+                   this.message = 'Por favor llena ambos campos';
+               } else {
+                   this.message = "";
+               }
+           }
+       }
+    });
+</script>
